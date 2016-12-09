@@ -1,0 +1,15 @@
+name: 'blitznote.com/aci/base:2016.12.09'
+
+aci:
+  app:
+    exec:
+      - /bin/bash
+  annotations:
+    - name: authors
+      value: 'W-Mark Kubacki <wmark@hurrikane.de>'
+    - name: homepage
+      value: 'https://blitznote.com/os'
+
+builder:
+  dependencies:
+    - 'blitznote.com/ubuntu:16.04'
