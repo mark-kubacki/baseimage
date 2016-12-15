@@ -46,5 +46,6 @@ remove_broken_symlinks
 # Due to removed libraries.
 ln -s /bin/bash /bin/sh
 ldconfig
+rm /var/cache/ldconfig/aux-cache
 
 exit 0

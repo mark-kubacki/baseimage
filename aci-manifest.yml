@@ -9,7 +9,15 @@ aci:
       value: 'W-Mark Kubacki <wmark@hurrikane.de>'
     - name: homepage
       value: 'https://blitznote.com/os'
+    - name: build-date
+      value: '2016-12-10T12:00:00+01:00'
 
 builder:
   dependencies:
     - 'blitznote.com/ubuntu:16.04'
+
+build:
+  exclude:
+    - /etc/resolv.conf
+    - /dgr
+    - /etc/update-motd.d/*
