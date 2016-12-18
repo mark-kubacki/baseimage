@@ -2,7 +2,7 @@
 .  /dgr/bin/functions.sh
 isLevelEnabled "debug" && set -x
 
-set -euo pipefail
+set -uo pipefail
 
 # Perl
 rm -r /usr/share/perl5 /usr/lib/**/perl* /usr/bin/perl*
@@ -18,6 +18,7 @@ rm -r /usr/bin/sensible* /usr/bin/select* /usr/bin/update* /usr/share/pixmaps /u
 rm -r /usr/share/**/python /usr/lib/python*
 rm -r /usr/share/base-files
 
+set -e
 # Now prune all files.
 while read fname; do
   if [[ -e "${fname}" && ! -d "${fname}" ]]; then
@@ -25,7 +26,7 @@ while read fname; do
   fi
 done < <(cat \
     /var/lib/dpkg/info/{apt,apt-transport-https,dash,debconf,debianutils,dpkg,gnupg-agent,gnupg2,libassuan0,libsqlite3-0}*.list \
-    /var/lib/dpkg/info/{pinentry-curses,sensible-utils,ubuntu-keyring,gpgv2,libdb5.3,libgpg-error0,libksba8,libsmartcols1}*.list \
+    /var/lib/dpkg/info/{pinentry-curses,sensible-utils,ubuntu-keyring,gpgv2,libgpg-error0}*.list \
     /var/lib/dpkg/info/{libapt-pkg5.0,libgcrypt20,perl-base}*.list \
     /var/lib/dpkg/info/{libpam,passwd,login,adduser,runit}*.list \
   | sort -u -r)
