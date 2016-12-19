@@ -14,7 +14,7 @@ aci:
 
 builder:
   dependencies:
-    - 'blitznote.com/ubuntu:16.04'
+    - 'blitznote.com/aci/base'
   mountPoints:
     - {from: cache, to: /cache}
 

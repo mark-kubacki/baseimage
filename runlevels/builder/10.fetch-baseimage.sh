@@ -4,7 +4,7 @@ isLevelEnabled "debug" && set -x
 
 set -euo pipefail
 : ${CACHEDIR:="/cache"}
-: ${BASEIMAGE:="ubuntu-16.04-linux-$(dpkg --print-architecture).aci"}
+: ${BASEIMAGE:="ubuntu-16.04-linux-amd64.aci"}
 : ${ACI_HOST:="https://s.blitznote.com/aci"}
 
 if [[ ! -s "${CACHEDIR}/${BASEIMAGE}" ]]; then
