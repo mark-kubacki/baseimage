@@ -1,4 +1,4 @@
-name: 'blitznote.com/aci/base:2016.12.24'
+name: 'blitznote.com/aci/base:2017.01.29'
 
 aci:
   app:
@@ -6,11 +6,11 @@ aci:
       - /bin/bash
   annotations:
     - name: authors
-      value: 'W-Mark Kubacki <wmark@hurrikane.de>'
+      value: 'W. Mark Kubacki <wmark@hurrikane.de>'
     - name: homepage
       value: 'https://blitznote.com/os'
     - name: build-date
-      value: '2016-12-24T01:10:00+00:00'
+      value: '2017-01-29T02:30:00+00:00'
 
 builder:
   dependencies:

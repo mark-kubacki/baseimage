@@ -7,11 +7,6 @@ set -euo pipefail
 : ${BASEIMAGE:="ubuntu-16.04-linux-amd64.aci"}
 : ${ACI_HOST:="https://s.blitznote.com/aci"}
 
-if [[ ! -s "${CACHEDIR}/${BASEIMAGE}" ]]; then
-  find / -name 'cache' -type d
-  exit 9
-fi
-
 curl --fail --progress-bar --location --remote-time --create-dirs \
   -H "Accept: application/aci, application/octet-stream" \
   -{z,o}"${CACHEDIR}/${BASEIMAGE}" \
