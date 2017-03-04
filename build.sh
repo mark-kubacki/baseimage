@@ -65,8 +65,12 @@ if [[ ! -s target/image.aci ]]; then
 fi
 
 : ${build_date:="$(<target/manifest.json jq -r '.annotations[] | select(.name == "build-date").value')"}
+: ${version:="$(<target/manifest.json jq -r '.labels[] | select(.name == "version").value')"}
 : ${workdir:="$(mktemp -d -t baseimage.XXXXXX)"}
 trap "rm -r \"${workdir}\"" EXIT
+
+info "Compressing the target ACI file.\n"
+xz -9e --stdout target/image.aci >base-${version}-linux-amd64.aci &
 
 info "Extracting the ACI file… "
 tar --exclude "manifest" --strip-components=1 \
@@ -95,4 +99,5 @@ sed -i \
 
 info "OK\n"
 
+wait
 exit 0
