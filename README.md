@@ -5,6 +5,29 @@ create a minimal baseimage for APPC/ACI container runtimes, such as (but not lim
 
 Any two builds will result in identical image files.
 
+## Usage
+### Docker
+
+Please see [blitznote/ubuntu](https://github.com/Blitznote/docker-ubuntu-debootstrap) for a complete
+README, including the advantages and system requirements for this container image.
+The most important difference is that this one does not ship with **Perl** and **apt**.
+
+Example usage:
+```Docker
+FROM blitznote/baseimage
+
+RUN curl …
+```
+
+### rkt
+
+```bash
+rkt image fetch blitznote.com/aci/base
+```
+
+You can find an extensive example, which uses this ACI as dependency and utilizes **dgr** for building,
+[here](https://github.com/wmark/aci-avorion-server).
+
 ## Howto
 
 1. Install [rkt](https://github.com/coreos/rkt/releases). Any version will do.
