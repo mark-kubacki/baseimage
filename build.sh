@@ -24,12 +24,38 @@ error() {
 }
 
 if [[ ! -s target/image.aci ]]; then
-  info "About to run 'dgr' to build the ACI file.\n"
+  info "Getting the latest Ubuntu to cache (if not present).\n"
+  # The baseimage is needed to get the actual datetime of the build.
+  curl --fail --progress-bar --location --remote-time --create-dirs \
+    -H "Accept: application/aci, application/octet-stream" \
+    -{z,o}"cache/ubuntu-16.04-linux-amd64.aci" \
+    https://s.blitznote.com/aci/ubuntu-16.04-linux-amd64.aci \
+  --next \
+    -H "Accept: text/plain, application/pgp-signature, application/octet-stream" \
+    -{z,o}"cache/ubuntu-16.04-linux-amd64.aci.asc" \
+    https://s.blitznote.com/aci/ubuntu-16.04-linux-amd64.aci.asc
+
+  info "If verification fails then get the key from: https://x509.directory/blitznote/releng-compat.gpg\n"
+  if command -v gpg2 &>/dev/null; then
+    gpg2 --verify cache/ubuntu-16.04-linux-amd64.aci{.asc,}
+  else
+    gpg --verify cache/ubuntu-16.04-linux-amd64.aci{.asc,}
+  fi
+
+  info "Reading the real build-date.\n"
+  : ${build_date:="$( \
+    tar --to-stdout -x manifest -f cache/ubuntu-16.04-linux-amd64.aci \
+    | jq -r '.annotations[] | select(.name == "build-date") | .value' \
+  )"}
+
+  info "Modifying aci-manifest.yml accordingly.\n"
   sed -i \
-    -e "/^name/s@base:[^']*@base:$(date --utc +%Y-%m-%d)@" \
-    -e "/build-date/"'!'"b;n;{s@value:.*@value: '$(date --utc -Iminutes | sed -e 's/[0-9][+]/0:00+/')'@}" \
+    -e "/^name/s@base:[^']*@base:$(printf "${build_date%T*}" | tr '-' '.')@" \
+    -e "/build-date/"'!'"b;n;{s@value:.*@value: '${build_date}'@}" \
     aci-manifest.yml
+
   # Subshell, because dgr could close STDIN or other channels.
+  info "About to run 'dgr' to build the ACI file.\n"
   (sudo dgr build)
 fi
 
