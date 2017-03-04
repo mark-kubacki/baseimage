@@ -1,5 +1,9 @@
 # Reproducibly Built APPC/ACI Baseimage
 
+Ubuntu without apt within less than 25 MiB.
+
+ * blitznote/baseimage [![](https://images.microbadger.com/badges/image/blitznote/baseimage.svg)](https://microbadger.com/images/blitznote/baseimage "Get your own image badge on microbadger.com")
+
 This is a demo which shows how using my patches to **[dgr](https://github.com/wmark/dgr)** you can
 create a minimal baseimage for APPC/ACI container runtimes, such as (but not limited to) CoreOS' **rkt**.
 
