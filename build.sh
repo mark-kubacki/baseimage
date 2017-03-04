@@ -23,6 +23,11 @@ error() {
   >&2 printf "${V_BOLD_RED}${1}${V_VIDOFF}"
 }
 
+if [[ $EUID -ne 0 ]]; then
+  error "Run this as 'root'.\n"
+  exit 1
+fi
+
 if [[ ! -s target/image.aci ]]; then
   info "Getting the latest Ubuntu to cache (if not present).\n"
   # The baseimage is needed to get the actual datetime of the build.
