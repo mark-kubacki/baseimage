@@ -25,6 +25,10 @@ error() {
 
 if [[ ! -s target/image.aci ]]; then
   info "About to run 'dgr' to build the ACI file.\n"
+  sed -i \
+    -e "/^name/s@base:[^']*@base:$(date --utc +%Y-%m-%d)@" \
+    -e "/build-date/"'!'"b;n;{s@value:.*@value: '$(date --utc -Iminutes | sed -e 's/[0-9][+]/0:00+/')'@}" \
+    aci-manifest.yml
   # Subshell, because dgr could close STDIN or other channels.
   (sudo dgr build)
 fi
