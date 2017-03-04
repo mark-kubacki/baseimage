@@ -18,6 +18,9 @@ rm -r /usr/bin/sensible* /usr/bin/select* /usr/bin/update* /usr/share/pixmaps /u
 rm -r /usr/share/**/python /usr/lib/python*
 rm -r /usr/share/base-files
 
+# Retain chpst.
+cp -a /usr/bin/chpst ./
+
 set -e
 # Now prune all files.
 while read fname; do
@@ -31,6 +34,8 @@ done < <(cat \
     /var/lib/dpkg/info/{libpam,passwd,login,adduser,runit}*.list \
   | sort -u -r)
 rm /usr/bin/localedef
+
+mv ./chpst /usr/bin/
 
 # Remove package lists.
 rm -r /var/lib/dpkg /var/log/installer
