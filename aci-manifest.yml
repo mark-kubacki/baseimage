@@ -1,4 +1,4 @@
-name: 'blitznote.com/aci/base:2017.03.21'
+name: 'blitznote.com/aci/base:2017.04.01'
 
 aci:
   app:
@@ -10,7 +10,7 @@ aci:
     - name: homepage
       value: 'https://blitznote.com/os'
     - name: build-date
-      value: '2017-03-21T17:00:00+00:00'
+      value: '2017-04-01T22:00:00+00:00'
 
 builder:
   dependencies:

@@ -1,6 +1,6 @@
 FROM scratch
 LABEL org.label-schema.vendor="Blitznote" \
-      org.label-schema.build-date="2017-03-21T17:00:00+00:00" \
+      org.label-schema.build-date="2017-04-01T22:00:00+00:00" \
       org.label-schema.name="Ubuntu without apt" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/Blitznote/baseimage"
